@@ -1,0 +1,255 @@
+@charset "UTF-8";
+
+/* 전체 배경(검은색) 및 기본 폰트 설정 */
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 상단 네비게이션 바 스타일 */
+.navbar {
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+/* 왼쪽 상단 메뉴 아이콘 크기 및 색깔 설정 */
+.menu-icon {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* 중앙 로고 정렬 */
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* 중앙 로고 크기 설정 가능 */
+.logo img {
+    height: 50px;
+}
+
+/* 검색창 스타일 설정 기능 */
+.search-bar input {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    outline: none;
+}
+
+/* 상단 아이콘(동그란 아이콘) 설정 기능 */
+.carousel {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    overflow-x: auto;
+    background-color: #111;
+}
+
+.carousel-item {
+    width: 80px;
+    height: 80px;
+    background-color: #444;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.8rem;
+}
+
+/*  카테고리(맛집, 놀거리, 카페) 박스 설정 가능 */
+.category {
+    background-color: #333;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* 카테고리 글자 크기 설정 px로도 가능 */
+.category-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* 카드 목록 스타일 (슬라이드) */
+.category-content {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin: 0 40px; /* 좌우 버튼 공간 확보 */
+    
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE, Edge */
+}
+
+.category-content::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
+}
+
+/* 카드 하나의 크기 및 스타일 설정  */
+.card {
+    position: relative;
+    width: 250px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden; /* 중요 */
+    flex-shrink: 0;
+    background-color: #444;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하면서 꽉 채움 */
+    display: block;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* 아이콘 파트 설정, 텍스트 설정도 가능  */
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 좌우 버튼 공통 스타일 */
+.scroll-btn {
+    background-color: white;        /* 버튼 배경은 흰색 */
+    color: black;                   /* 화살표는 검정색 */
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1;
+    padding: 5px 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20%;            /* 약간 둥근 버튼 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    transition: background-color 0.2s;
+}
+/* 버튼에 마우스 올리면 색깔 변경 */
+.scroll-btn:hover {
+    background-color: #eee;
+}
+
+/* 왼쪽 버튼 위치 */
+.scroll-btn.left {
+    position: absolute;
+    left: -20px;
+}
+
+/* 오른쪽 버튼 위치 */
+.scroll-btn.right {
+    position: absolute;
+    right: -20px;
+}
+
+/* 하단부 스타일 설정 */
+.footer {
+    background-color: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    font-size: 0.8rem;
+}
+
+/* 하단부 링크 파트 설정 */
+.footer a {
+    color: #aaa;
+    text-decoration: none;
+    margin: 0 8px;
+}
+/* 하단부 마우스 올리면 색깔 변경 */
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/*상단 배너 영역 설정
+.banner-card {
+    width: 350px;
+    height: 220px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.banner-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+/*카드 영역 설정 가능 */
+.banner-style {
+    position: relative;
+    width: 250px;
+    height: 270px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.banner-style img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+.banner-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+}
