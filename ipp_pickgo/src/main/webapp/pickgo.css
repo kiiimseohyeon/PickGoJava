@@ -92,12 +92,12 @@ body {
     scroll-behavior: smooth;
     margin: 0 40px; /* 좌우 버튼 공간 확보 */
     
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* IE, Edge */
+    scrollbar-width: none;      
+    -ms-overflow-style: none;   
 }
 
 .category-content::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
+    display: none;            
 }
 
 /* 카드 하나의 크기 및 스타일 설정  */
