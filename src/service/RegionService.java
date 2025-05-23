@@ -29,9 +29,7 @@ public class RegionService {
         }
     }
 
-    /**
-     * 사용자 선택 공통 메서드 (순서 보장)
-     */
+    // 옵션 목록을 출력하고 사용자 입력을 받아 해당 항목 반환
     private String selectOption(String title, List<String> options) {
         System.out.println(title + ":");
         for (int i = 0; i < options.size(); i++) {
@@ -51,9 +49,7 @@ public class RegionService {
         }
     }
 
-    /**
-     * 조건에 맞는 여행지 필터링 (지역+카테고리는 반드시 일치, 나머지는 하나라도 일치)
-     */
+    // 지역, 카테고리 일치 + 연령대 or 여행유형 일치 시 추천
     private List<Destination> getByFilters(String region, String category, String ageGroup, String travelType) {
         List<Destination> filtered = new ArrayList<>();
         for (Destination d : destinations) {
@@ -66,9 +62,7 @@ public class RegionService {
         return filtered;
     }
 
-    /**
-     * 샘플 여행지 데이터 초기화
-     */
+    // 샘플 여행지 데이터
     private List<Destination> initializeSampleData() {
         return List.of(
             new Destination(1, "한밭수목원", "볼거리", "자연을 느낄 수 있는 수목원", "서구",
@@ -88,9 +82,7 @@ public class RegionService {
         );
     }
 
-    /**
-     * 여행지 데이터 클래스
-     */
+    // 여행지 정보를 담는 데이터 클래스
     static class Destination {
         private final int id;
         private final String name;
