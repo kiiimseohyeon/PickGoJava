@@ -8,3 +8,6 @@
  
  select user();
 
+
+데이터베이스내에서 이미지 가져올수 있는 방법 
+https://www.codejava.net/coding/how-to-display-images-from-database-in-jsp-page-with-java-servlet#google_vignette //참고 사
