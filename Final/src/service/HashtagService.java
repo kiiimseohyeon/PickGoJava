@@ -1,11 +1,11 @@
 package service;
 
+import dao.DestinationDAO;
 import model.Destination;
 import util.ConsolePrinter;
 
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class HashtagService implements SearchService {
     private final Scanner scanner;
@@ -37,11 +37,40 @@ public class HashtagService implements SearchService {
                     System.out.println("❌ 입력한 태그 중 일부가 존재하지 않습니다.");
                     continue;
                 }
+
                 List<String> places = findPlacesByTags(tagIds);
                 if (places.isEmpty()) {
                     System.out.println("❌ 입력한 모든 태그를 포함한 장소가 없습니다.");
                 } else {
                     ConsolePrinter.printPlaceResults(places);
+
+                    // 🔽 상세 정보 조회 루프
+                    while (true) {
+                        System.out.print("\n📄 특정 장소의 상세 정보를 확인하시겠습니까? (y/n): ");
+                        String wantDetail = scanner.nextLine().trim().toLowerCase();
+                        if (wantDetail.equals("y")) {
+                            while (true) {
+                                System.out.print("👉 상세 정보를 볼 장소명을 입력하세요: ");
+                                String placeName = scanner.nextLine().trim();
+                                Destination detail = DestinationDAO.getPlaceDetailByName(placeName);
+
+                                if (detail != null) {
+                                    ConsolePrinter.printPlaceDetail(detail);
+                                    break;
+                                } else {
+                                    System.out.println("❌ 해당 장소의 정보를 찾을 수 없습니다.");
+                                    System.out.print("🔁 다시 입력하시겠습니까? (y/n): ");
+                                    String again = scanner.nextLine().trim().toLowerCase();
+                                    if (!again.equals("y")) break;
+                                }
+                            }
+                            break;
+                        } else if (wantDetail.equals("n")) {
+                            break;
+                        } else {
+                            System.out.println("❌ 잘못된 입력입니다. y 또는 n을 입력해주세요.");
+                        }
+                    }
                 }
 
                 if (!askContinue()) break;
