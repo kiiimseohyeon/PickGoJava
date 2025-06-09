@@ -1,17 +1,16 @@
 package service;
 
-import util.ConsolePrinter;
+import dao.DestinationDAO;
 import model.Destination;
+import util.ConsolePrinter;
 
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class RegionService implements SearchService {
     private final Scanner scanner;
     private final Map<String, List<Destination>> dataMap;
 
-    // DB 연결 정보
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ipp_pickgo?useSSL=false&serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "eun1224!!";
@@ -36,7 +35,35 @@ public class RegionService implements SearchService {
 
             ConsolePrinter.printRegionResults(district, results);
 
-            // 다시 검색 여부 확인
+            // 🔽 상세 정보 루프
+            while (true) {
+                System.out.print("\n📄 특정 장소의 상세 정보를 확인하시겠습니까? (y/n): ");
+                String wantDetail = scanner.nextLine().trim().toLowerCase();
+                if (wantDetail.equals("y")) {
+                    while (true) {
+                        System.out.print("👉 상세 정보를 볼 장소명을 입력하세요: ");
+                        String placeName = scanner.nextLine().trim();
+                        Destination detail = DestinationDAO.getPlaceDetailByName(placeName);
+
+                        if (detail != null) {
+                            ConsolePrinter.printPlaceDetail(detail);
+                            break;
+                        } else {
+                            System.out.println("❌ 해당 장소의 정보를 찾을 수 없습니다.");
+                            System.out.print("🔁 다시 입력하시겠습니까? (y/n): ");
+                            String again = scanner.nextLine().trim().toLowerCase();
+                            if (!again.equals("y")) break;
+                        }
+                    }
+                    break;
+                } else if (wantDetail.equals("n")) {
+                    break;
+                } else {
+                    System.out.println("❌ 잘못된 입력입니다. y 또는 n으로 입력해주세요.");
+                }
+            }
+
+            // 🔁 다시 검색 여부
             while (true) {
                 System.out.print("\n🔁 다시 지역 추천을 검색하시겠습니까? (y/n): ");
                 String retry = scanner.nextLine().trim().toLowerCase();
@@ -46,7 +73,7 @@ public class RegionService implements SearchService {
                 } else if (retry.equals("n")) {
                     return;
                 } else {
-                    System.out.println("\u274c 잘못된 입력입니다. y 또는 n으로 입력해주세요.");
+                    System.out.println("❌ 잘못된 입력입니다. y 또는 n으로 입력해주세요.");
                 }
             }
         }
