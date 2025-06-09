@@ -63,25 +63,41 @@ public class RegionService {
         }
     }
 
-    // 카테고리별로 묶어 3개씩 출력
+    // 카테고리별로 묶어 출력
     private void printGroupedByCategory(List<Destination> destinations) {
-        List<String> order = Arrays.asList("맛집", "카페", "볼거리");
+        Set<String> uniqueCategories = destinations.stream()
+                .map(d -> d.category)
+                .collect(Collectors.toSet());
 
-        for (String category : order) {
+        List<String> specialCategories = Arrays.asList("맛집", "카페");
+
+        for (String cat : specialCategories) {
             List<Destination> filtered = destinations.stream()
-                    .filter(d -> category.equals(d.category))
+                    .filter(d -> cat.equals(d.category))
                     .collect(Collectors.toList());
-
             if (!filtered.isEmpty()) {
-                System.out.println("\n* " + category + " 추천 목록");
+                System.out.println("\n* " + cat + " 추천 목록");
                 System.out.println("------------------------------------------------");
+                printDestinations(filtered);
+            }
+        }
 
-                for (int i = 0; i < filtered.size(); i++) {
-                    System.out.printf("%-20s", "- " + filtered.get(i).name);
-                    if ((i + 1) % 3 == 0 || i == filtered.size() - 1) {
-                        System.out.println();
-                    }
-                }
+        List<Destination> others = destinations.stream()
+                .filter(d -> !specialCategories.contains(d.category))
+                .collect(Collectors.toList());
+
+        if (!others.isEmpty()) {
+            System.out.println("\n* 놀거리 추천 목록");
+            System.out.println("------------------------------------------------");
+            printDestinations(others);
+        }
+    }
+
+    private void printDestinations(List<Destination> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.printf("%-20s", "- " + list.get(i).name);
+            if ((i + 1) % 3 == 0 || i == list.size() - 1) {
+                System.out.println();
             }
         }
     }
