@@ -36,14 +36,13 @@ public class ConsolePrinter {
     }
 
     public static void printRegionIntro() {
-        System.out.println("🔎 지역 기반 장소 추천을 시작합니다.");
+        System.out.println("\n🔎 지역 기반 장소 추천을 시작합니다.");
         System.out.println("👉 아래 지역 중 하나를 선택하여 추천을 받아보세요.");
     }
 
     public static void printRegionResults(String district, List<Destination> results) {
         System.out.println("\n✅ 지역 추천 결과 (" + district + "):");
 
-        // 카테고리를 '맛집', '카페', '놀거리'로 정리
         Map<String, List<Destination>> grouped = new HashMap<>();
         for (Destination dest : results) {
             String original = dest.getCategory().toLowerCase();
@@ -78,5 +77,14 @@ public class ConsolePrinter {
             }
         }
     }
-}
 
+    // ✅ 장소 상세 정보 출력용 메서드
+    public static void printPlaceDetail(Destination dest) {
+        System.out.println("\n🔍 장소 상세 정보");
+        System.out.println("--------------------------------------------------");
+        System.out.println("📍 장소명: " + dest.getName());
+        System.out.println("📌 주소: " + dest.getAddress());
+        System.out.println("📝 설명: " + dest.getDescription());
+        System.out.println("--------------------------------------------------");
+    }
+}
